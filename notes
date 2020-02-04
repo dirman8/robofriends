@@ -1,0 +1,45 @@
+/*
+Alur searchbox:
+Ganti Cardlist dengan App
+Buat App.js
+	Pada App.js buat tambahkan judul dan searchbox
+Buat SearchBox.js
+Buat SearchBox berfungsi untuk mencari robot
+*/
+
+//Detail fungsi pencarian robot:
+//1. Pada App.js : 
+<Searchbox searchChange={this.onSearchChange}/>
+/*Artinya Jalankan (render) Searchbox.js, berikan input
+  (props) yaitu 'searchChange' yang mana isinya adalah 
+  fungsi 'onSearchChange'*/
+
+//2. Pada Searchbox.js :
+<input
+ 	//...
+ 	onChange={searchChange}
+/>
+/*Artinya apabila ada perubahan pada input, eksekusi 
+fungsi 'searchChange' yang mana isinya fungsi 'onSearchChange'*/
+
+//3. Pada App.js :
+onSearchChange(event) {
+	console.log(event.target.value);
+}
+/* Fungsi yang menampilkan nilai target dalam hal ini nilai
+iput */
+
+/*4. Agar state 'searchfield' terupdate setiap user mengetikkan
+pencarian, maka pada fungsi ,onSearchChange ditambahkan :*/
+this.setState({searchfield: event.target.value})
+
+//5. Agar 'Cardlist' hanya menampilkan robot yang difilter maka
+//props dari Cardlist diganti menjadi :
+<Cardlist robots={this.state.robots}
+//namun sebelum itu, di awal baris render(), ditambahkan definisi
+//filteredRobots :
+const filteredRobots = this.state.robots.filter(robots => {
+	return robots.name.toLowerCase().includes(this.state.Searchfiled.toLowerCase)
+})
+
+
